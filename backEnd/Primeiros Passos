@@ -1,0 +1,17 @@
+1 Instalar o servidor Express
+ npm install express --save
+
+2 Instalar NodeMon 
+   yarn add nodemon -D
+
+2.1 Execultando nodemon
+yarn nodemon index.js
+
+2.2 Deixando o yarn automatico pelo package.json
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+
+2.3  Depois execultar o comando 
+yarn dev
