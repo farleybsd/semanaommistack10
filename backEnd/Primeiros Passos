@@ -15,3 +15,9 @@ yarn nodemon index.js
 
 2.3  Depois execultar o comando 
 yarn dev
+
+3.0 Instalando o mongoose
+yarn add mongoose
+
+4.0 consumindo api externa Axios
+yarn add axios
