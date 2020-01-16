@@ -21,3 +21,6 @@ yarn add mongoose
 
 4.0 consumindo api externa Axios
 yarn add axios
+
+5.0 ACESSANDO API DE QUALQUER REDE CORS
+yarn add cors
