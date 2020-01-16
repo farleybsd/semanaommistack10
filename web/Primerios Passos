@@ -1,0 +1,6 @@
+
+instalando e criando projeto react
+yarn create react-app web
+
+Inicializando a aplicacao com yarn
+yarn start
