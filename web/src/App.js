@@ -3,40 +3,41 @@
 //Estado: Informaçoes mantidas pelo componente (Lembrar: Imutabilidade)
 //useEffect execultar uma funcao quando for alterada
 
-import React, { useState, useEffect } from 'react';
+import React,{useState,useEffect} from  'react'
+import api from './services/api'
+import DevItem from './componets/DevItem'
+import DevForm from './componets/DevForm'
+
 import './global.css'
 import './App.css'
 import './SideBar.css'
 import './main.css'
 
 function App() {
+  
+    const [devs,setdevs] = useState([])
 
-  const [latitude, setLatitude] = useState('')
-  const [longitude, setLongitude] = useState('')
-  const [github_username, setgithub_username] = useState('')
-  const [techs, settechs] = useState('')
-  useEffect(() => {
+  useEffect(()=>{
 
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setLatitude(latitude);
-        setLongitude(longitude);
-      },
-      (err) => {
-        console.log(err)
-      },
-      {
-        timeout: 3000,
+      async function loadDevs(){
+        const response = await api.get('/devs')
+        setdevs(response.data)
       }
+      loadDevs()
+  },[])
+
+  async function handleAddDev(data){
+
+    
+    const response = await api.post('/devs',data
+    
     )
-  }, [])
-
-  async function handleAddDev(e){
-
-      e.prevent.default()
-
-  }
+    console.log(response.data)
+    
+    setdevs([... devs,response.data])
+    
+}
+ 
 
   return (
 
@@ -44,125 +45,14 @@ function App() {
 
       <aside>
         <strong>Cadastrar</strong>
-        <form onSubmit={handleAddDev}>
-
-          <div className="input-block">
-            <label htmlFor="github_username">Usuário do GitHub</label>
-            <input
-              name="github_username"
-              id="username_githug"
-              required
-              value={github_username}
-              onChange={e => { setgithub_username(e.target.value)}}
-            />
-
-          </div>
-
-
-          <div className="input-block">
-            <label htmlFor="techs">Tecnologias</label>
-            <input 
-            name="techs" 
-            id="techs"
-             required 
-             value ={ techs}
-             onChange={ e => { settechs(e.target.value)}}
-             />
-          </div>
-
-
-          <div className="input-group">
-
-            <div className="input-block">
-              <label htmlFor="latitude">Latitude</label>
-              <input
-                type="number"
-                name="latitude"
-                id="latitude"
-                required
-                value={latitude}
-                onChange={e => setLatitude(e.target.value)}
-              />
-            </div>
-            <div className="input-block">
-              <label htmlFor="longitude">Longitude</label>
-              <input
-                type="number"
-                name="longitude"
-                id="longitude"
-                required
-                value={longitude}
-                onChange={e => setLongitude(e.target.value)}
-              />
-            </div>
-          </div>
-          <button type="submit">Salvar</button>
-        </form>
-
+        <DevForm onSubmit= {handleAddDev} />
       </aside>
 
       <main>
         <ul>
-
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars3.githubusercontent.com/u/13547418?s=460&v=4" alt="FarleyRufino"></img>
-              <div className="user-info">
-                <strong> Farley Rufino</strong>
-                <span>ReactJs,React Native ,Node.js</span>
-              </div>
-            </header>
-            <p>Sou um Alieando no mundo rs</p>
-            <a href="https://github.com/farleybsd">Acessar Perfil GitHub</a>
-          </li>
-
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars3.githubusercontent.com/u/13547418?s=460&v=4" alt="FarleyRufino"></img>
-              <div className="user-info">
-                <strong> Farley Rufino</strong>
-                <span>ReactJs,React Native ,Node.js</span>
-              </div>
-            </header>
-            <p>Sou um Alieando no mundo rs</p>
-            <a href="https://github.com/farleybsd">Acessar Perfil GitHub</a>
-          </li>
-
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars3.githubusercontent.com/u/13547418?s=460&v=4" alt="FarleyRufino"></img>
-              <div className="user-info">
-                <strong> Farley Rufino</strong>
-                <span>ReactJs,React Native ,Node.js</span>
-              </div>
-            </header>
-            <p>Sou um Alieando no mundo rs</p>
-            <a href="https://github.com/farleybsd">Acessar Perfil GitHub</a>
-          </li>
-
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars3.githubusercontent.com/u/13547418?s=460&v=4" alt="FarleyRufino"></img>
-              <div className="user-info">
-                <strong> Farley Rufino</strong>
-                <span>ReactJs,React Native ,Node.js</span>
-              </div>
-            </header>
-            <p>Sou um Alieando no mundo rs</p>
-            <a href="https://github.com/farleybsd">Acessar Perfil GitHub</a>
-          </li>
-
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars3.githubusercontent.com/u/13547418?s=460&v=4" alt="FarleyRufino"></img>
-              <div className="user-info">
-                <strong> Farley Rufino</strong>
-                <span>ReactJs,React Native ,Node.js</span>
-              </div>
-            </header>
-            <p>Sou um Alieando no mundo rs</p>
-            <a href="https://github.com/farleybsd">Acessar Perfil GitHub</a>
-          </li>
+       {devs.map(dev => (
+          <DevItem key={dev._id} dev ={dev} />
+        ))}
         </ul>
       </main>
 
