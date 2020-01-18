@@ -14,3 +14,12 @@ expo init mobile - blank - yes para depedencia
 yarn start
 
 Acessar depois pela camera do celular parecido com yonic dev
+
+Instalando rotas no native 
+yarn add react-navigation
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context
+yarn add react-navigation-stack
+yarn add  @react-native-community/masked-view
+
+https://rocketseat.com.br/week-10/aulas
+41:00
