@@ -1,0 +1,16 @@
+
+instalar expo no celular 
+
+instalar no pc
+
+yarn global add expo-cli
+
+install expo global 
+export PATH="$(yarn global bin):$PATH"
+
+criando projeto 
+expo init mobile - blank - yes para depedencia
+
+yarn start
+
+Acessar depois pela camera do celular parecido com yonic dev
