@@ -21,5 +21,16 @@ expo install react-native-gesture-handler react-native-reanimated react-native-s
 yarn add react-navigation-stack
 yarn add  @react-native-community/masked-view
 
-https://rocketseat.com.br/week-10/aulas
-41:00
+instalando mapas
+expo install react-native-maps
+
+instalando location 
+expo install expo-location
+
+install webView
+expo install react-native-webview
+
+instalando axios
+yarn add axios
+
+parei 01:29:10
